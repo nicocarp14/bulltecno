@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Bulltecno: tecnología e iPhones para mayoristas." />
+    <title>Bulltecno | Tecnología mayorista</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .category-grid > .category { display: none; }
+      .product-space-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+      .product-space { min-height: 285px; padding: 23px; position: relative; overflow: hidden; color: white; text-decoration: none; border-radius: 4px; }
+      .red-space { background: #e91b25; } .dark-space { background: #222; } .light-space { background: #eee9e4; color: #202020; }
+      .product-space > span { font: 600 13px "Space Grotesk"; opacity: .72; }
+      .photo-space { position: absolute; right: 42px; top: 45px; width: 130px; height: 132px; border: 1px dashed currentColor; border-radius: 5px; display: grid; place-items: center; text-align: center; font: 700 12px/1.35 "Space Grotesk"; letter-spacing: .7px; opacity: .75; }
+      .light-space .photo-space { background: #e4ded9; }
+      .product-space h3 { font: 700 27px "Space Grotesk"; position: absolute; bottom: 51px; margin: 0; }
+      .product-space p { position: absolute; bottom: 28px; margin: 0; font-size: 12px; opacity: .8; }
+      .product-space b { position: absolute; right: 20px; bottom: 24px; font-size: 18px; }
+      .large-placeholder { position: absolute; right: 17%; top: 93px; width: 250px; height: 230px; border: 2px dashed #ffffffb8; border-radius: 6px; display: grid; place-items: center; text-align: center; color: white; font: 500 17px/1.5 "Space Grotesk"; letter-spacing: 1px; z-index: 1; }
+      .large-placeholder strong { font-size: 21px; }
+      @media (max-width: 750px) { .product-space-grid { grid-template-columns: 1fr; } .product-space { min-height: 230px; } .large-placeholder { right: 17%; top: 53px; width: 205px; height: 190px; font-size: 14px; } .large-placeholder strong { font-size: 17px; } }
+    </style>
+    <style>
+      /* Tarjetas amplias de productos: imagen a la izquierda, datos y precios a la derecha. */
+      .product-space-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .product-space {
+        min-height: 390px;
+        padding: 28px;
+        display: grid;
+        grid-template-columns: minmax(280px, 42%) 1fr;
+        grid-template-rows: auto 1fr auto;
+        column-gap: 34px;
+        align-items: start;
+        border-radius: 10px;
+      }
+
+      .product-space > span {
+        position: absolute;
+        top: 20px;
+        left: 22px;
+        z-index: 2;
+        background: #ffffff24;
+        padding: 5px 9px;
+        border-radius: 100px;
+      }
+
+      .product-image,
+      .product-space .photo-space {
+        position: static;
+        grid-column: 1;
+        grid-row: 1 / -1;
+        width: 100%;
+        height: 334px;
+        margin: 0;
+        object-fit: cover;
+        object-position: center;
+        border: 0;
+        border-radius: 7px;
+      }
+
+      .product-space .photo-space {
+        display: grid;
+        background: #ffffff12;
+        border: 1px dashed currentColor;
+        place-items: center;
+      }
+
+      .product-space h3 {
+        position: static;
+        grid-column: 2;
+        grid-row: 1;
+        margin: 8px 0 16px;
+        font-size: clamp(28px, 3vw, 42px);
+        line-height: 1.05;
+      }
+
+      .product-space p {
+        position: static;
+        grid-column: 2;
+        grid-row: 2;
+        align-self: start;
+        margin: 0;
+        font-size: 16px;
+        line-height: 1.85;
+        white-space: pre-line;
+        opacity: .92;
+      }
+
+      .product-space b {
+        position: static;
+        grid-column: 2;
+        grid-row: 3;
+        align-self: end;
+        justify-self: start;
+        padding: 12px 15px;
+        background: #ffffff;
+        color: #202020;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+
+      .light-space b { background: #202020; color: white; }
+
+      @media (max-width: 700px) {
+        .product-space {
+          min-height: 0;
+          grid-template-columns: 1fr;
+          grid-template-rows: auto auto auto auto;
+          gap: 16px;
+          padding: 20px;
+        }
+        .product-image,
+        .product-space .photo-space { grid-column: 1; grid-row: 1; height: 270px; }
+        .product-space h3 { grid-column: 1; grid-row: 2; margin: 0; font-size: 30px; }
+        .product-space p { grid-column: 1; grid-row: 3; font-size: 15px; }
+        .product-space b { grid-column: 1; grid-row: 4; }
+      }
+    </style>
+    <style>
+      /* Catálogo en formato tienda: imagen arriba, información debajo. */
+      .product-space-grid { display: none; }
+      .product-catalog-grid { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+      .store-product-card { min-width: 0; background: white; border: 1px solid #ebe6e2; border-radius: 10px; overflow: hidden; box-shadow: 0 8px 24px rgba(37, 24, 18, .08); transition: transform .2s ease, box-shadow .2s ease; }
+      .store-product-card:hover { transform: translateY(-5px); box-shadow: 0 14px 32px rgba(37, 24, 18, .14); }
+      .store-product-image-wrap { height: 275px; background: #f3f0ed; overflow: hidden; }
+      .store-product-image { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; }
+      .store-product-body { min-height: 280px; padding: 22px; display: flex; flex-direction: column; align-items: flex-start; }
+      .store-product-body h3 { margin: 0 0 10px; font: 700 23px/1.1 "Space Grotesk", sans-serif; color: #1d1d1d; }
+      .store-product-description { margin: 0 0 17px; color: #6d6865; font-size: 14px; line-height: 1.5; }
+      .store-product-prices { width: 100%; padding: 12px 0; border-top: 1px solid #eee9e5; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; color: #333; font-size: 12px; font-weight: 700; }
+      .store-product-button { margin-top: auto; display: inline-flex; padding: 11px 16px; border-radius: 4px; background: #e91b25; color: white; text-decoration: none; font-size: 13px; font-weight: 700; }
+      .store-product-empty .store-product-image-wrap { display: grid; place-items: center; background: #f4efeb; }
+      .store-product-placeholder { width: 150px; height: 150px; display: grid; place-items: center; border: 1px dashed #9b928d; border-radius: 6px; color: #746c67; text-align: center; font: 700 12px/1.35 "Space Grotesk", sans-serif; letter-spacing: .8px; }
+      @media (max-width: 900px) { .product-catalog-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+      @media (max-width: 600px) { .product-catalog-grid { grid-template-columns: 1fr; gap: 18px; } .store-product-image-wrap { height: 300px; } }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <a class="logo" href="#inicio" aria-label="Bulltecno, inicio"><span>BULL</span>TECNO<i></i></a>
+      <button class="menu-button" aria-label="Abrir menú" aria-expanded="false">☰</button>
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="#mayoristas">Mayoristas</a>
+        <a href="#iphones">Destacados</a>
+        <a href="#productos">Productos</a>
+        <a class="nav-cta" href="#contacto">Consultanos</a>
+      </nav>
+    </header>
+
+    <main id="inicio">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow"><span></span> TECNOLOGÍA QUE IMPULSA TU NEGOCIO</p>
+          <h1>Bulltecno <em>Tu mayorista de confianza.</em></h1>
+          <p class="hero-text">Productos mayoristas, iPhones y accesorios seleccionados. Atención ágil, precios competitivos y stock para hacer crecer tu negocio.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#contacto">Quiero ser mayorista <b>→</b></a>
+            <a class="button button-link" href="#iphones">Ver productos <b>↓</b></a>
+          </div>
+          <div class="hero-notes">
+            <div><strong>+100</strong><span>productos disponibles</span></div>
+            <div><strong>Atención</strong><span>personalizada</span></div>
+            <div><strong>Envíos</strong><span>a todo el país</span></div>
+          </div>
+        </div>
+        <div class="hero-product" aria-label="iPhone rojo">
+          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+          <div class="phone phone-back"><span class="camera c1"></span><span class="camera c2"></span><span class="camera c3"></span></div>
+          <div class="phone phone-front"><div class="island"></div><div class="screen-glow"></div><div class="phone-label">iPhone<br /><strong>en stock</strong></div></div>
+        </div>
+      </section>
+
+      <section class="benefits" id="mayoristas">
+        <article><span class="benefit-icon">▣</span><h2>Precios mayoristas</h2><p>Una propuesta clara y conveniente para revender.</p></article>
+        <article><span class="benefit-icon">◌</span><h2>Productos elegidos</h2><p>Calidad y tendencias que tus clientes quieren.</p></article>
+        <article><span class="benefit-icon">↗</span><h2>Envíos seguros</h2><p>Recibí tu pedido donde estés, sin complicaciones.</p></article>
+      </section>
+
+      <section class="catalog" id="productos">
+        <div class="section-heading"><p class="eyebrow"><span></span> NUESTRO CATÁLOGO</p><h2>Lo mejor en <em>tecnología.</em></h2></div>
+        <a class="all-link" href="#contacto">Ver catálogo completo <b>→</b></a>
+        <div class="category-grid">
+          <div class="product-catalog-grid">
+            <article class="store-product-card">
+              <div class="store-product-image-wrap"><img src="img/airpod.jpeg" alt="AirPods Pro 2" class="store-product-image" /></div>
+              <div class="store-product-body">
+                <h3>AirPods Pro 2</h3>
+                <p class="store-product-description">Auriculares inalámbricos. Consultá por disponibilidad y colores.</p>
+                <div class="store-product-prices">
+                  <span>5 u. — $15.308 c/u</span><span>10 u. — $14.523 c/u</span><span>20 u. — $13.738 c/u</span><span>30 u. — $12.953 c/u</span><span>50 u. — $12.168 c/u</span><span>100 u. — $11.697 c/u</span>
+                </div>
+                <a class="store-product-button" href="#contacto">Consultar</a>
+              </div>
+            </article>
+
+            <article class="store-product-card">
+              <div class="store-product-image-wrap"><img src="img/Alpine.jpeg" alt="Alpine" class="store-product-image" /></div>
+              <div class="store-product-body">
+                <h3>Alpine</h3>
+                <p class="store-product-description">Auriculares inalámbricos. Consultá por disponibilidad y colores.</p>
+                <div class="store-product-prices">
+                  <span>1 u. — $430.000</span><span>3 u. — $340.000 c/u</span><span>5 u. — $310.000 c/u</span><span>10 u. — $265.000 c/u</span>
+                </div>
+                <a class="store-product-button" href="#contacto">Consultar</a>
+              </div>
+            </article>
+
+            <article class="store-product-card">
+              <div class="store-product-image-wrap"><img src="img/Alpine.jpeg" alt="Alpine" class="store-product-image" /></div>
+              <div class="store-product-body">
+                <h3>Bicileta Alpine</h3>
+                <p class="store-product-description">BICICLETA ALPINE MTB Rodado 29''.</p>
+                <div class="store-product-prices">
+                  <span>1 u. — $430.000</span><span>3 u. — $340.000 c/u</span><span>5 u. — $310.000 c/u</span><span>10 u. — $265.000 c/u</span>
+                </div>
+                <a class="store-product-button" href="#contacto">Consultar</a>
+              </div>
+            </article>
+            
+            <article class="store-product-card">
+              <div class="store-product-image-wrap"><img src="img/body.jpeg" alt="Body Splash Victoria Secret" class="store-product-image" /></div>
+              <div class="store-product-body">
+                <h3>Body Splash Victoria Secret</h3>
+                <p class="store-product-description">Body Splash Victoria Secret. Consultar aromas.</p>
+                <div class="store-product-prices">
+                  <span>5 u. — $16.642</span><span>10 u. — $15.386 c/u</span><span>20 u. — $14.760 c/u</span><span>50 u. — $13.970 c/u</span><span>100 u. — $13.188 c/u</span>
+                </div>
+                <a class="store-product-button" href="#contacto">Consultar</a>
+              </div>
+            </article>
+          </div>
+          <a class="category category-red" href="#iphones"><span class="category-number">01</span><div class="mini-phone"><i></i><i></i></div><h3>iPhones</h3><p>Modelos nuevos y usados</p><b>Explorar →</b></a>
+          <a class="category category-dark" href="#contacto"><span class="category-number">02</span><div class="buds"><i></i><i></i></div><h3>Accesorios</h3><p>Todo para complementar</p><b>Explorar →</b></a>
+          <a class="category category-light" href="#contacto"><span class="category-number">03</span><div class="watch">12:45</div><h3>Smartwatch</h3><p>Estilo y conectividad</p><b>Explorar →</b></a>
+        </div>
+      </section>
+
+
+      <section class="contact" id="contacto">
+        <p class="eyebrow"><span></span> HABLEMOS</p>
+        <h2>¿Listo para abastecer tu negocio?</h2>
+        <p>Escribinos y pedí la lista de precios actualizada.</p>
+        <a class="button button-primary" href="https://wa.me/5493794638380" target="_blank" rel="noopener">Hablar por WhatsApp con Facundo <b>→</b></a>
+        <a class="button button-primary" href="https://wa.me/5493794949990" target="_blank" rel="noopener">Hablar por WhatsApp con Nicolas <b>→</b></a>
+      </section>
+    </main>
+
+    <footer><a class="logo" href="#inicio"><span>BULL</span>TECNO<i></i></a><p>© 2026 Bulltecno. Tecnología para crecer.</p><a href="#inicio">Volver arriba ↑</a></footer>
+    <script src="script.js"></script>
+  </body>
+</html>
