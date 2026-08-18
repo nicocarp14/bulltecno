@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Carrito de compras Bulltecno" />
+    <title>Mi carrito | Bulltecno</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="carrito.css" />
+  </head>
+  <body>
+    <header class="cart-header"><a class="logo" href="index.html"><span>BULL</span>TECNO<i></i></a><a class="back-link" href="index.html">← Seguir comprando</a></header>
+    <main class="cart-page">
+      <section class="cart-card cart-products"><div class="cart-title"><div><h1>Mi carrito</h1><p>Revisá tus productos antes de realizar el pedido.</p></div><a href="index.html" class="desktop-back">Seguir comprando</a></div><div class="table-wrap"><table><thead><tr><th>Producto</th><th>Precio</th><th>Cantidad</th><th>Subtotal</th><th></th></tr></thead><tbody id="cart-table"></tbody></table></div></section>
+      <aside class="cart-card summary-card"><h2>Resumen</h2><div class="summary-row"><span>Productos</span><strong id="summary-count">0</strong></div><div class="summary-row summary-total"><span>Total estimado</span><strong id="summary-total">$0</strong></div><small>El precio unitario se ajusta según la cantidad mayorista.</small>
+        <form id="order-form" novalidate>
+          <p class="form-error" id="form-error" role="alert"></p><p class="whatsapp-label">Enviar pedido por WhatsApp:</p><button class="checkout-button" type="button" data-phone="5493794638380">Confirmar con Facundo</button><button class="checkout-button secondary" type="button" data-phone="5493794949990">Confirmar con Nicolás</button>
+        </form>
+      </aside>
+    </main>
+    <script src="carrito.js"></script>
+  </body>
+</html>
