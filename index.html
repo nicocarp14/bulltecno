@@ -151,6 +151,7 @@
         <a href="#mayoristas">Mayoristas</a>
         <a href="#iphones">Destacados</a>
         <a href="#productos">Productos</a>
+        <button class="cart-trigger" id="cart-trigger" type="button" aria-label="Abrir carrito">Carrito <span id="cart-count">0</span></button>
         <a class="nav-cta" href="#contacto">Consultanos</a>
       </nav>
     </header>
@@ -178,12 +179,6 @@
         </div>
       </section>
 
-      <section class="benefits" id="mayoristas">
-        <article><span class="benefit-icon">▣</span><h2>Precios mayoristas</h2><p>Una propuesta clara y conveniente para revender.</p></article>
-        <article><span class="benefit-icon">◌</span><h2>Productos elegidos</h2><p>Calidad y tendencias que tus clientes quieren.</p></article>
-        <article><span class="benefit-icon">↗</span><h2>Envíos seguros</h2><p>Recibí tu pedido donde estés, sin complicaciones.</p></article>
-      </section>
-
       <section class="catalog" id="productos">
         <div class="section-heading"><p class="eyebrow"><span></span> NUESTRO CATÁLOGO</p><h2>Lo mejor en <em>tecnología.</em></h2></div>
         <a class="all-link" href="#contacto">Ver catálogo completo <b>→</b></a>
@@ -197,7 +192,7 @@
                 <div class="store-product-prices">
                   <span>5 u. — $15.308 c/u</span><span>10 u. — $14.523 c/u</span><span>20 u. — $13.738 c/u</span><span>30 u. — $12.953 c/u</span><span>50 u. — $12.168 c/u</span><span>100 u. — $11.697 c/u</span>
                 </div>
-                <a class="store-product-button" href="#contacto">Consultar</a>
+                <button class="store-product-button add-to-cart" type="button" data-product="AirPods Pro 2" data-minimum="5" data-prices="5:15308,10:14523,20:13738,30:12953,50:12168,100:11697">Agregar al carrito</button>
               </div>
             </article>
 
@@ -209,7 +204,7 @@
                 <div class="store-product-prices">
                   <span>1 u. — $430.000</span><span>3 u. — $340.000 c/u</span><span>5 u. — $310.000 c/u</span><span>10 u. — $265.000 c/u</span>
                 </div>
-                <a class="store-product-button" href="#contacto">Consultar</a>
+                <button class="store-product-button add-to-cart" type="button" data-product="Bicicleta Alpine" data-minimum="1" data-prices="1:430000,3:340000,5:310000,10:265000">Agregar al carrito</button>
               </div>
             </article>
             
@@ -221,7 +216,7 @@
                 <div class="store-product-prices">
                   <span>5 u. — $16.642</span><span>10 u. — $15.386 c/u</span><span>20 u. — $14.760 c/u</span><span>50 u. — $13.970 c/u</span><span>100 u. — $13.188 c/u</span>
                 </div>
-                <a class="store-product-button" href="#contacto">Consultar</a>
+                <button class="store-product-button add-to-cart" type="button" data-product="Body Splash Victoria Secret" data-minimum="5" data-prices="5:16642,10:15386,20:14760,50:13970,100:13188">Agregar al carrito</button>
               </div>
             </article>
           </div>
@@ -237,11 +232,19 @@
         <h2>¿Listo para abastecer tu negocio?</h2>
         <p>Escribinos y pedí la lista de precios actualizada.</p>
         <a class="button button-primary" href="https://wa.me/5493794638380" target="_blank" rel="noopener">Hablar por WhatsApp con Facundo <b>→</b></a>
+        <p></p>
         <a class="button button-primary" href="https://wa.me/5493794949990" target="_blank" rel="noopener">Hablar por WhatsApp con Nicolas <b>→</b></a>
       </section>
     </main>
 
     <footer><a class="logo" href="#inicio"><span>BULL</span>TECNO<i></i></a><p>© 2026 Bulltecno. Tecnología para crecer.</p><a href="#inicio">Volver arriba ↑</a></footer>
+    <aside class="cart-panel" id="cart-panel" aria-hidden="true" aria-label="Carrito de compra">
+      <div class="cart-panel-header"><h2>Tu pedido</h2><button class="cart-close" id="cart-close" type="button" aria-label="Cerrar carrito">×</button></div>
+      <div class="cart-items" id="cart-items"><p class="cart-empty">Tu carrito está vacío.</p></div>
+      <div class="cart-summary"><div><span>Total estimado</span><strong id="cart-total">$0</strong></div><small>El precio unitario se ajusta automáticamente por cantidad.</small></div>
+      <div class="cart-checkout"><p>Enviar pedido por WhatsApp:</p><button class="checkout-button" type="button" data-phone="5493794638380">Facundo</button><button class="checkout-button checkout-secondary" type="button" data-phone="5493794949990">Nicolás</button></div>
+    </aside>
+    <div class="cart-overlay" id="cart-overlay"></div>
     <script src="script.js"></script>
   </body>
 </html>
