@@ -5,7 +5,7 @@ const cartModal = document.querySelector('#cart-modal');
 const cartOverlay = document.querySelector('#cart-modal-overlay');
 const cartItems = document.querySelector('#cart-modal-items');
 const cartTotal = document.querySelector('#cart-modal-total');
-const cartCount = document.querySelector('#cart-count');
+const cartCounts = document.querySelectorAll('.cart-count');
 const toast = document.querySelector('#add-toast');
 let toastTimer;
 
@@ -33,10 +33,10 @@ function showToast() { clearTimeout(toastTimer); toast.classList.add('is-visible
 function renderCart() {
   const count = cart.reduce((sum, item) => sum + item.quantity, 0);
   const total = cart.reduce((sum, item) => sum + unitPrice(item) * item.quantity, 0);
-  cartCount.textContent = count;
+  cartCounts.forEach((cartCount) => { cartCount.textContent = count; });
   cartTotal.textContent = money(total);
   if (!cart.length) { cartItems.innerHTML = '<p class="cart-empty">Tu carrito está vacío.</p>'; return; }
-  cartItems.innerHTML = cart.map((item, index) => { const price = unitPrice(item); return `<article class="cart-item"><div><h3>${item.name}</h3><div class="cart-item-price">${money(price)} c/u · ${money(price * item.quantity)}</div><div class="cart-quantity"><button type="button" data-action="minus" data-index="${index}">−</button><span>${item.quantity}</span><button type="button" data-action="plus" data-index="${index}">+</button></div></div><button class="cart-remove" type="button" data-action="remove" data-index="${index}">Quitar</button></article>`; }).join('');
+  cartItems.innerHTML = cart.map((item, index) => { const price = unitPrice(item); return `<article class="cart-item"><div><h3>${item.name}</h3><div class="cart-item-price">${money(price)} c/u · ${money(price * item.quantity)}</div><div class="cart-quantity"><button type="button" data-action="minus" data-index="${index}">−</button><input class="cart-quantity-input" type="number" inputmode="numeric" min="${item.minimum}" value="${item.quantity}" data-index="${index}" aria-label="Cantidad de ${item.name}"><button type="button" data-action="plus" data-index="${index}">+</button></div></div><button class="cart-remove" type="button" data-action="remove" data-index="${index}">Quitar</button></article>`; }).join('');
 }
 
 document.querySelectorAll('.add-to-cart').forEach((button) => button.addEventListener('click', () => {
@@ -60,7 +60,15 @@ cartItems.addEventListener('click', (event) => {
   saveCart(); renderCart();
 });
 
-document.querySelector('#cart-trigger')?.addEventListener('click', openCart);
+cartItems.addEventListener('change', (event) => {
+  if (!event.target.matches('.cart-quantity-input')) return;
+  const item = cart[Number(event.target.dataset.index)];
+  const quantity = Number(event.target.value);
+  item.quantity = Number.isFinite(quantity) ? Math.max(item.minimum, Math.floor(quantity)) : item.minimum;
+  saveCart(); renderCart();
+});
+
+document.querySelectorAll('.cart-trigger, .mobile-cart-button').forEach((trigger) => trigger.addEventListener('click', openCart));
 document.querySelector('#cart-modal-close')?.addEventListener('click', closeCart);
 cartOverlay?.addEventListener('click', closeCart);
 document.querySelector('#toast-cart-button')?.addEventListener('click', openCart);

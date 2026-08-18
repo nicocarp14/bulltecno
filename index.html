@@ -147,18 +147,43 @@
       .cart-modal{position:fixed;z-index:91;left:50%;top:50%;width:min(520px,calc(100% - 28px));max-height:min(730px,calc(100dvh - 28px));padding:24px;background:#fffdfb;border-radius:10px;box-shadow:0 24px 60px #0005;display:flex;flex-direction:column;transform:translate(-50%,-46%);opacity:0;visibility:hidden;transition:.2s ease}.cart-modal.is-open{transform:translate(-50%,-50%);opacity:1;visibility:visible}
       .cart-modal-header{display:flex;align-items:center;justify-content:space-between;padding-bottom:16px;border-bottom:1px solid #e9e4e1}.cart-modal-header p{margin:0;color:#e91b25;font-size:10px;letter-spacing:1.2px;font-weight:700}.cart-modal-header h2{margin:3px 0 0;font:700 27px "Space Grotesk",sans-serif}.cart-modal-close{border:0;background:transparent;font-size:31px;line-height:1;cursor:pointer;color:#333}.cart-modal-items{overflow:auto;min-height:120px;padding:6px 0}.cart-empty{text-align:center;color:#777;margin:47px 0}.cart-item{display:grid;grid-template-columns:1fr auto;gap:10px;padding:15px 0;border-bottom:1px solid #eee9e5}.cart-item h3{margin:0 0 5px;font:700 16px "Space Grotesk",sans-serif}.cart-item-price{font-size:12px;color:#777}.cart-remove{border:0;background:transparent;color:#b82a31;cursor:pointer;font:700 12px "DM Sans",sans-serif}.cart-quantity{display:inline-flex;align-items:center;gap:8px;margin-top:10px;padding:3px;border:1px solid #ddd6d2;border-radius:4px}.cart-quantity button{width:25px;height:25px;border:0;border-radius:3px;background:#f3efeb;cursor:pointer;font-size:17px}.cart-quantity span{min-width:23px;text-align:center;font-size:13px;font-weight:700}.cart-modal-total{padding:16px 0;border-top:1px solid #e9e4e1}.cart-modal-total span{font-size:14px}.cart-modal-total strong{float:right;color:#e91b25;font:700 23px "Space Grotesk",sans-serif}.cart-modal-total small{display:block;clear:both;padding-top:7px;color:#777;font-size:11px}.cart-modal-actions{border-top:1px solid #e9e4e1;padding-top:15px}.cart-modal-actions p{margin:0 0 7px;font-size:13px;font-weight:700}.checkout-button{width:100%;margin-top:8px;border:0;border-radius:4px;padding:13px;background:#e91b25;color:white;cursor:pointer;font:700 14px "DM Sans",sans-serif}.checkout-secondary{background:#202020}.add-toast{position:fixed;z-index:100;left:50%;bottom:24px;display:flex;align-items:center;gap:10px;padding:13px 16px;background:#202020;color:white;border-radius:5px;box-shadow:0 10px 30px #0004;font-size:14px;transform:translate(-50%,120px);opacity:0;transition:.22s ease}.add-toast.is-visible{transform:translate(-50%,0);opacity:1}.add-toast button{border:0;background:transparent;color:#ff7a80;cursor:pointer;font:700 13px "DM Sans",sans-serif}@media(max-width:520px){.cart-modal{padding:19px}.add-toast{width:calc(100% - 28px);justify-content:space-between;bottom:14px}}
     </style>
+    <style>
+      .cart-quantity-input{width:46px;height:25px;padding:0 3px;border:0;background:transparent;text-align:center;font:700 13px "DM Sans",sans-serif;appearance:textfield;-moz-appearance:textfield}.cart-quantity-input::-webkit-inner-spin-button,.cart-quantity-input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}.cart-quantity-input:focus{outline:1px solid #e91b25;border-radius:3px}
+    </style>
+    <style>
+      /* El PNG ocupa toda la portada: la zona clara queda libre para el texto y la diagonal se conserva. */
+      .hero { position: relative; display: block; min-height: 560px; background: #f7f4f0; isolation: isolate; }
+      .hero-banner { position: absolute; inset: 0; z-index: -1; overflow: hidden; }
+      .hero-banner img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+      .hero-copy { width: min(52%, 610px); max-width: none; min-height: 560px; margin: 0 auto 0 max(30px, calc((100vw - 1240px) / 2)); padding: 96px 44px 60px 0; justify-self: auto; }
+      @media (max-width: 750px) {
+        .hero { min-height: 650px; }
+        .hero-banner img { object-position: 66% center; }
+        .hero-copy { width: 100%; min-height: 650px; margin: 0; padding: 70px 25px 40px; background: linear-gradient(90deg, rgba(255,255,255,.94) 0%, rgba(255,255,255,.76) 55%, rgba(255,255,255,.12) 100%); }
+      }
+    </style>
+    <style>
+      .mobile-cart-button{display:none;border:0;background:transparent;position:relative;align-items:center;justify-content:center;width:42px;height:42px;color:#202020;cursor:pointer}.mobile-cart-button svg{width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}.mobile-cart-button .cart-count{position:absolute;right:0;top:0;display:grid;place-items:center;min-width:18px;height:18px;padding:0 4px;border-radius:100px;background:#e91b25;color:white;font:700 10px "DM Sans",sans-serif}@media(max-width:750px){.header{justify-content:space-between}.header .menu-button,.header .nav{display:none!important}.mobile-cart-button{display:inline-flex}}
+    </style>
+    <style>
+      .desktop-cart-button{position:relative;display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border:0;background:transparent;color:#202020;cursor:pointer}.desktop-cart-button svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}.desktop-cart-button .cart-count{position:absolute;right:-2px;top:-1px;display:grid;place-items:center;min-width:18px;height:18px;padding:0 4px;border-radius:100px;background:#e91b25;color:white;font:700 10px "DM Sans",sans-serif}@media(max-width:750px){.desktop-cart-button{display:none}}
+    </style>
   </head>
   <body>
     <header class="header">
       <a class="logo" href="#inicio" aria-label="Bulltecno, inicio"><span>BULL</span>TECNO<i></i></a>
       <button class="menu-button" aria-label="Abrir menú" aria-expanded="false">☰</button>
       <nav class="nav" aria-label="Navegación principal">
-        <a href="#mayoristas">Mayoristas</a>
-        <a href="#iphones">Destacados</a>
-        <a href="#productos">Productos</a>
-        <button class="cart-trigger" id="cart-trigger" type="button" aria-label="Ver carrito">Carrito <span id="cart-count">0</span></button>
+        <button class="desktop-cart-button cart-trigger" type="button" aria-label="Ver carrito">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 1.9-1.4L21 8H6.3"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>
+          <span class="cart-count">0</span>
+        </button>
         <a class="nav-cta" href="#contacto">Consultanos</a>
       </nav>
+      <button class="mobile-cart-button" type="button" aria-label="Ver carrito">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 1.9-1.4L21 8H6.3"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>
+        <span class="cart-count">0</span>
+      </button>
     </header>
 
     <main id="inicio">
@@ -177,15 +202,14 @@
             <div><strong>Envíos</strong><span>a todo el país</span></div>
           </div>
         </div>
-        <div class="hero-product" aria-label="iPhone rojo">
-          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
-          <div class="phone phone-back"><span class="camera c1"></span><span class="camera c2"></span><span class="camera c3"></span></div>
-          <div class="phone phone-front"><div class="island"></div><div class="screen-glow"></div><div class="phone-label">iPhone<br /><strong>en stock</strong></div></div>
+        <!-- Reemplazá img/banner-principal.jpg por la imagen que diseñes para este espacio. -->
+        <div class="hero-banner">
+          <img src="img/bannerDiagonal.png" alt="Productos destacados Bulltecno" />
         </div>
       </section>
 
       <section class="catalog" id="productos">
-        <div class="section-heading"><p class="eyebrow"><span></span> NUESTRO CATÁLOGO</p><h2>Lo mejor en <em>tecnología.</em></h2></div>
+        <div class="section-heading"><p class="eyebrow"><span></span> NUESTRO CATÁLOGO</p><h2>Lo mejor en <em>tecnología.</em></h2><p>Agrega el producto y luego en el carrito podrás modificar la cantidad.</p></div>
         <a class="all-link" href="#contacto">Ver catálogo completo <b>→</b></a>
         <div class="category-grid">
           <div class="product-catalog-grid">
